@@ -1,0 +1,4 @@
+Ceci est une phrase texte.
+Il comporte des retours a la ligne.
+Comme ceci pour voir,
+si tout marche correctement.

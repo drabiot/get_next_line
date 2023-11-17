@@ -13,13 +13,19 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
-int main(void)
+int    main(void)
 {
-	int		fd;
-	char	*line;
+    char    *str;
+    int        fd;
 
-	fd = open("test", O_RDONLY);
-	line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
+    fd = open("get_next_line.h", O_RDONLY);
+    str = get_next_line(fd);
+    while (str)
+    {
+        printf("%s", str);
+        if (str)
+            free(str);
+        str = get_next_line(fd);
+    }
+    close(fd);
 }
