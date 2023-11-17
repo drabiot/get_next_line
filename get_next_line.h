@@ -24,8 +24,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 
 char	*get_next_line(int fd);
-void	read_buff(int fd, char *stash);
-void	add_to_line(char *stash, char *line);
 
 
 #endif //GET_NEXT_LINE_H

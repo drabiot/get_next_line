@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 int main(void)
 {
@@ -19,5 +20,6 @@ int main(void)
 
 	fd = open("test", O_RDONLY);
 	line = get_next_line(fd);
+	printf("%s", line);
 	free(line);
 }

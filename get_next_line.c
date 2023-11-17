@@ -12,27 +12,14 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
-{
-	static char	*stash;
-	char		*line;
-	
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	line = NULL;
-	read_buff(fd, stash);
-	add_to_line(stash, line);
-	return (line);	
-}
-
-void	read_buff(int fd, char *stash)
+char	*read_buff(int fd, char *stash)
 {
 	char	*buff;
 	int		reading;
 
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
-		return ;
+		return (NULL);
 	while (!new_line(stash))
 	{
 		reading = (int)read(fd, buff, BUFFER_SIZE);
@@ -40,18 +27,36 @@ void	read_buff(int fd, char *stash)
 		if ((stash == 0 && reading == 0) || reading == -1)
 		{
 			free(buff);
-			return ;
+			return (NULL);
 		}
-		ft_strjoin(stash, buff);
+		stash = ft_strjoin(stash, buff);
 	}
+	return (stash);
 }
 
-void	add_to_line(char *stash, char *line)
+char	*add_to_line(char *stash)
 {
 	int	i;
+	char	*line;
 
 	i = 0;
 	while (stash[i] != '\n')
 		i++;
-	ft_strlcpy(line, stash, (i + 1));
+	line = malloc(sizeof(char) * i + 1);
+	if (!line)
+		return (NULL);
+	ft_strlcpy(line, stash, i + 1);
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stash = NULL;
+	char		*line;
+	
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stash = read_buff(fd, stash);
+	line = add_to_line(stash);
+	return (line);	
 }
