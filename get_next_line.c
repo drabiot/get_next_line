@@ -40,9 +40,10 @@ char	*add_to_line(char *stash)
 	char	*line;
 
 	i = 0;
-	while (stash[i] != '\n')
+	while (stash[i] && stash[i] != '\n')
 		i++;
-	i++;
+	if (stash[i] == '\n')
+		i++;
 	line = malloc(sizeof(char) * i + 1);
 	if (!line)
 		return (NULL);
@@ -57,7 +58,7 @@ char	*clean_stash(char *stash)
 	char	*tmp;
 
 	i = 0;
-	while (stash[i] != '\n')
+	while (stash[i] && stash[i] != '\n')
 		i++;
 	len = ft_strlen(stash) - i;
 	tmp = malloc(sizeof(char) * (len + 1));
