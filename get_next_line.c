@@ -23,7 +23,7 @@ char	*read_buff(int fd, char *stash)
 	while (!new_line(stash) && reading != 0)
 	{
 		reading = (int)read(fd, buff, BUFFER_SIZE);
-		if ((stash == 0 && reading == 0) || reading == -1)
+		if ((!stash && reading == 0) || reading == -1)
 		{
 			free(buff);
 			return (NULL);
@@ -40,6 +40,8 @@ char	*add_to_line(char *stash)
 	char	*line;
 
 	i = 0;
+	if (!stash)
+		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
@@ -78,5 +80,5 @@ char	*get_next_line(int fd)
 	stash = read_buff(fd, stash);
 	line = add_to_line(stash);
 	stash = clean_stash(stash);
-	return (line);	
+	return (line);
 }
