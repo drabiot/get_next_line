@@ -25,5 +25,4 @@ size_t	ft_strlen(const char *str);
 
 char	*get_next_line(int fd);
 
-
 #endif //GET_NEXT_LINE_H
