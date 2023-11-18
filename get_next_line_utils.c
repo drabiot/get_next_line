@@ -28,7 +28,7 @@ int	new_line(char *str)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*array;
 
@@ -39,6 +39,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ft_strlcpy(array, s1, ft_strlen(s1) + 1);
 	if (s2)
 		ft_strlcpy(array + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	free(s1);
 	return (array);
 }
 

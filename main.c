@@ -17,15 +17,18 @@ int    main(void)
 {
     char    *str;
     int        fd;
+    int        i;
 
+    i = 0;
     fd = open("get_next_line.h", O_RDONLY);
     str = get_next_line(fd);
-    while (str)
+    while (i < 40)
     {
         printf("%s", str);
         if (str)
             free(str);
         str = get_next_line(fd);
+        i++;
     }
     close(fd);
 }
