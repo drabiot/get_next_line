@@ -20,7 +20,8 @@
 
 int	new_line(char *str);
 char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char    *ft_strcpy(char *dst, const char *src);
+char	*ft_strcat(char *s1, char *s2, char *array);
 size_t	ft_strlen(const char *str);
 
 char	*get_next_line(int fd);

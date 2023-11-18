@@ -18,9 +18,9 @@ char	*read_buff(int fd, char *stash)
 	int		reading;
 
 	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	reading = 1;
 	if (!buff)
 		return (NULL);
-	reading = 1;
 	while (!new_line(stash) && reading != 0)
 	{
 		reading = (int)read(fd, buff, BUFFER_SIZE);
@@ -42,16 +42,16 @@ char	*add_to_line(char *stash)
 	char	*line;
 
 	i = 0;
-	if (!stash)
+	if (!stash || !stash[0])
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
 		i++;
-	line = malloc(sizeof(char) * i + 1);
+	line = malloc(sizeof(char) * (i + 1));
 	if (!line)
 		return (NULL);
-	ft_strlcpy(line, stash, i + 1);
+	line = ft_strcpy(line, stash);
 	return (line);
 }
 
@@ -62,13 +62,11 @@ char	*clean_stash(char *stash)
 	char	*tmp;
 
 	i = 0;
-	if (!stash)
+	if (!stash || !stash[0])
 	{
 		free(stash);
 		return (NULL);
 	}
-	if (!stash)
-		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
@@ -77,7 +75,7 @@ char	*clean_stash(char *stash)
 	tmp = malloc(sizeof(char) * (len + 1));
 	if (!tmp)
 		return (NULL);
-	ft_strlcpy(tmp, &stash[i], len);
+	tmp = ft_strcpy(tmp, &stash[i]);
 	free(stash);
 	return (tmp);
 }
@@ -92,7 +90,7 @@ char	*get_next_line(int fd)
 	stash = read_buff(fd, stash);
 	line = add_to_line(stash);
 	stash = clean_stash(stash);
-	if (!stash && !line)
+	if (!stash && !line[0])
 	{
 		free(stash);
 		return(NULL);
