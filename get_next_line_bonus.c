@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tchartie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:08:18 by tchartie          #+#    #+#             */
-/*   Updated: 2023/11/20 15:55:44 by tchartie         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:03:25 by tchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 /*
  * Take a file descriptor & copy the content to a stash
@@ -98,18 +98,18 @@ char	*clean_stash(char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash = NULL;
+	static char	*stash[1024];
 	char		*line;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
-	stash = read_buff(fd, stash);
-	line = add_to_line(stash);
-	stash = clean_stash(stash);
-	if (!stash && !line)
+	stash[fd] = read_buff(fd, stash[fd]);
+	line = add_to_line(stash[fd]);
+	stash[fd] = clean_stash(stash[fd]);
+	if (!stash[fd] && !line)
 	{
-		free(stash);
+		free(stash[fd]);
 		return (NULL);
 	}
 	return (line);

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -95,4 +95,4 @@ char	*ft_strcat(char *s1, char *s2, char *array);
 
 size_t	ft_strlen(const char *str);
 
-#endif //GET_NEXT_LINE_H
+#endif //GET_NEXT_LINE_BONUS_H
