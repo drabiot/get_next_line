@@ -24,6 +24,10 @@
 /*                                                            */
 /* ********************************************************** */
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif //BUFFER_SIZE
+
 /* ****************************************** */
 /*               get_next_line                */
 /*     Take a file descriptor and return      */
