@@ -102,7 +102,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	stash = read_buff(fd, stash);
 	line = add_to_line(stash);
